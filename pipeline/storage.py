@@ -74,15 +74,16 @@ class GZIPMixin(object):
             return
 
         for path in paths:
-            if not matches_patterns(path, self.gzip_patterns):
-                continue
-            original_file = self.open(path)
-            gzipped_path = "{0}.gz".format(path)
-            if self.exists(gzipped_path):
-                self.delete(gzipped_path)
-            gzipped_file = self._compress(original_file)
-            gzipped_path = self.save(gzipped_path, gzipped_file)
-            yield gzipped_path, gzipped_path, True
+            if path:
+                if not matches_patterns(path, self.gzip_patterns):
+                    continue
+                original_file = self.open(path)
+                gzipped_path = "{0}.gz".format(path)
+                if self.exists(gzipped_path):
+                    self.delete(gzipped_path)
+                gzipped_file = self._compress(original_file)
+                gzipped_path = self.save(gzipped_path, gzipped_file)
+                yield gzipped_path, gzipped_path, True
 
 
 class NonPackagingMixin(object):
@@ -128,12 +129,22 @@ class BaseFinderStorage(PipelineStorage):
         return exists
 
     def listdir(self, path):
+        directories, files = [], []
         for finder in self.finders.get_finders():
-            for storage in finder.storages.values():
-                try:
-                    return storage.listdir(path)
-                except OSError:
-                    pass
+            try:
+                storages = finder.storages.values()
+            except AttributeError:
+                continue
+            else:
+                for storage in storages:
+                    try:
+                        new_directories, new_files = storage.listdir(path)
+                    except OSError:
+                        pass
+                    else:
+                        directories.extend(new_directories)
+                        files.extend(new_files)
+        return directories, files
 
     def find_storage(self, name):
         for finder in self.finders.get_finders():

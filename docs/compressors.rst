@@ -93,9 +93,7 @@ to compress javascripts.
 
 To use it add this to your ``PIPELINE_JS_COMPRESSOR`` ::
 
-  PIPELINE_JS_COMPRESSOR = (
-    'pipeline.compressors.closure.ClosureCompressor',
-  )
+  PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.closure.ClosureCompressor'
 
 
 ``PIPELINE_CLOSURE_BINARY``
@@ -222,6 +220,17 @@ command to compress stylesheets. To use it, add this to your ``PIPELINE_CSS_COMP
   Additional arguments to use when cssmin is called.
 
   Default to ``''``
+
+No-Op Compressors
+=================
+
+The No-Op compressor don't perform any operation, when used, only concatenation occurs.
+This is useful for debugging faulty concatenation due to poorly written javascript and other errors.
+
+To use it, add this to your settings ::
+
+  PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.NoopCompressor'
+  PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.NoopCompressor'
 
 
 Write your own compressor class

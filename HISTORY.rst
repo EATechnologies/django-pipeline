@@ -3,6 +3,39 @@
 History
 =======
 
+1.3.25
+------
+
+* Many documentation improvements. Thanks to Brad Pitcher, Jaromir Fojtu and Feanil Patel.
+* Add no-op compressors. Thanks to Zachary Kazanski.
+
+1.3.24
+------
+
+* Quote path before passing them to compilers.
+* Add documentation around PIPELINE_MIMETYPES.
+
+1.3.23
+------
+
+* Fix gzip mixin regression. Thanks to Sayed Raianul Kabir.
+* Improve PipelineStorage listdir method. Thanks to Julien Hartmann.
+* Fix setup.py. Thanks to Benjamin Peterson and Colin Dunklau.
+
+1.3.22
+------
+
+* Fix mimetype declaration. Thanks to Thomas Parslow.
+* Fix gzip mixin. Thanks to Sayed Raianul Kabir.
+* Small documentation improvements. Thanks to Kristoffer Smedlund for the report.
+
+1.3.21
+------
+
+* Fix whitespace and charset in templates tags output. Thanks to Philipp Wollermann.
+* Various documentation fixes. Thanks to Chris Applegate, Natal Ngetal, DJ Sharkey and Andy Kish.
+* Fix bug in data-uri handling when running Python 3. Thanks to Sander Steffann.
+
 1.3.20
 ------
 

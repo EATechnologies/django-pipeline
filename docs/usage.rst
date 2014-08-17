@@ -32,19 +32,20 @@ this can be done by overriding the templates ``pipeline/css.html`` and ``pipelin
 Example
 -------
 
-If you have specified the CSS-groups “screen” and “print” and a JavaScript-group
+If you have specified the CSS-groups “colors” and “stats” and a JavaScript-group
 with the name “scripts”, you would use the following code to output them all ::
 
    {% load compressed %}
    {% compressed_css 'colors' %}
-   {% compressed_js 'stats' %}
+   {% compressed_css 'stats' %}
+   {% compressed_js 'scripts' %}
 
 Collect static
 ==============
 
 Pipeline integrates with staticfiles, you just need to setup ``STATICFILES_STORAGE`` to ::
 
-    STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+    STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
 
 Then when you run ``collectstatic`` command, your CSS and your javascripts will be compressed in the same time ::
 
